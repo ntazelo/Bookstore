@@ -53,7 +53,6 @@ export const removeBook = (payload) => async (dispatch) => {
     payload,
   });
 };
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOK:
@@ -71,5 +70,4 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default reducer;

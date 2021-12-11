@@ -1,9 +1,11 @@
+
 .cont-nav {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   margin: 0.5rem auto;
   align-items: center;
+  background-color: #fff;
 }
 
 header {
@@ -11,6 +13,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  background-color: #fff;
 }
 
 .navbar-title,
@@ -24,11 +27,14 @@ header {
 .navbar-title {
   font-size: 2rem;
   font-weight: bolder;
+  text-decoration: none;
+  color: #0290ff;
 }
 
 .navbar-list {
   display: flex;
   list-style: none;
+  align-items: center;
 }
 
 .navbar-option {
@@ -42,4 +48,18 @@ header {
 
 .navbar-list > *:not(:last-child) {
   border-right: 2px solid #fff;
+}
+
+.logo-cont {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #0290ff;
+}
+
+.color-logo {
+  color: #0290ff;
 }
