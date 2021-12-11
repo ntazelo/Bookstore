@@ -11,7 +11,7 @@ export const fetchBook = () => async (dispatch) => {
   const booksID = Object.keys(Books);
   const books = booksID.map((key) => {
     const book = Books[key][0];
-    book.id = key;
+    book.id = Number(key);
     return book;
   });
   dispatch({

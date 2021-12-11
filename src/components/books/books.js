@@ -59,7 +59,7 @@ const Books = () => {
           <Book
             key={book.id}
             name={book.title}
-            id={book.id}
+            id={Number(book.id)}
           />
         ))}
 
