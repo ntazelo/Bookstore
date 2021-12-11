@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { removeBook, API } from '../../../redux/books/books';
 
 const Book = (props) => {
-  const { name, author, id } = props;
+  const { name, id } = props;
   const dispatch = useDispatch();
 
   const removeBookHandler = async () => {
@@ -24,11 +24,8 @@ const Book = (props) => {
       <span>
         {name}
         {' '}
-        by
-        {' '}
-        {author}
       </span>
-
+      {' '}
       <button type="button" onClick={removeBookHandler} className="remove-book">Remove</button>
     </li>
   );
