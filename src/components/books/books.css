@@ -1,5 +1,60 @@
-.list-book-cont {
+.list-book {
   list-style: none;
-  width: 60%;
-  margin: 6rem auto;
+  width: 80%;
+  margin: 6rem auto 0 auto;
+}
+
+.new-book-cont {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.list-book > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.horizontal-line {
+  height: 2px;
+  margin-top: 2rem;
+  opacity: 0.4;
+}
+
+.form-control {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-name {
+  width: 58%;
+  padding: 1rem;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+.category-input {
+  width: 18%;
+  padding: 1rem;
+  border: none;
+  font-family: "Poppins", sans-serif;
+}
+
+.title-hint {
+  text-transform: uppercase !important;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-input:focus-visible,
+.book-name:focus-visible {
+  outline: 2px solid #0290ff;
+  outline-style: groove;
+}
+
+.btn-book {
+  width: 18%;
+  background-color: #0290ff;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
 }

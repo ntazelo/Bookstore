@@ -4,9 +4,11 @@ import './header.css';
 const Header = () => (
   <header>
     <div className="cont-nav">
-      <h2 className="navbar-title">Bookstore</h2>
       <nav>
         <ul className="navbar-list">
+          <li className="navbar-option">
+            <Link className="navbar-title" to="/">Bookstore CMS</Link>
+          </li>
           <li className="navbar-option">
             <Link className="navbar-link" to="/">Books</Link>
           </li>
@@ -15,6 +17,7 @@ const Header = () => (
           </li>
         </ul>
       </nav>
+      <span className="logo-cont"><i className="fas fa-user color-logo" /></span>
     </div>
   </header>
 );
