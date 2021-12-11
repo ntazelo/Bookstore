@@ -1,12 +1,12 @@
-/* eslint-disable react/prop-types */
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { removeBook } from '../../../redux/books/books';
 
 const Book = (props) => {
-  const { name, author, id } = props;
+  const { name, id } = props;
   const dispatch = useDispatch();
 
-  const removeBookHandler = () => {
+  const removeBookHandler = async () => {
     dispatch(removeBook(id));
   };
 
@@ -15,14 +15,16 @@ const Book = (props) => {
       <span>
         {name}
         {' '}
-        by
-        {' '}
-        {author}
       </span>
-
+      {' '}
       <button type="button" onClick={removeBookHandler} className="remove-book">Remove</button>
     </li>
   );
+};
+
+Book.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Book;

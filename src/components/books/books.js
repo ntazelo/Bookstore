@@ -1,53 +1,67 @@
-/* eslint-disable react/jsx-wrap-multilines */
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Book from './book/book';
+import { addBook, fetchBook } from '../../redux/books/books';
 import './books.css';
-import { addBook } from '../../redux/books/books';
 
 const Books = () => {
   const [book, setBook] = useState('');
-  const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState('');
   const data = useSelector((state) => state.booksReducer);
-
   const dispatch = useDispatch();
-  const submitBookToStore = () => {
-    if (book.length > 0 && author.length > 0) {
+
+  useEffect(() => {
+    if (data.length === 0) {
+      dispatch(fetchBook());
+    }
+  }, []);
+
+  const submitBookToStore = (e) => {
+    e.preventDefault();
+    if (book.length > 0 && category.length > 0) {
       const newBook = {
         id: Math.floor(Math.random() * 100000),
         title: book,
-        author,
+        category,
       };
       dispatch(addBook(newBook));
+
       setBook('');
-      setAuthor('');
+      setCategory('');
     }
-    console.log(data, 'store');
   };
 
   const addBookField = (e) => {
     setBook(e.target.value);
   };
 
-  const addAuthor = (e) => {
-    setAuthor(e.target.value);
+  const addCategory = (e) => {
+    setCategory(e.target.value);
   };
 
   return (
     <div className="list-book-cont">
-      <form className="form-control">
-        <input type="text" placeholder="Enter the book" value={book} className="book-name" onChange={addBookField} />
-        <input type="text" placeholder="Enter the author" value={author} className="book-author" onChange={addAuthor} />
-        <button type="button" onClick={submitBookToStore}>Add book</button>
+      <form className="form-control" onSubmit={submitBookToStore}>
+        <input type="text" required placeholder="Enter the book" value={book} className="book-name" onChange={addBookField} />
+        <select name="category" value={category} onChange={addCategory} required>
+          <option value="">Category</option>
+          <option value="sport">sport</option>
+          <option value="thriller">thriller</option>
+          <option value="romance">romance</option>
+          <option value="action">action</option>
+          <option value="horror">horror</option>
+        </select>
+        <button type="submit">Add book</button>
       </form>
 
       <ul className="list-book-cont">
-        {data.length > 0 && data.map((book) => <Book
-          key={book.id}
-          name={book.title}
-          author={book.author}
-          id={book.id}
-        />)}
+        {data.length > 0 && data.map((book) => (
+          <Book
+            key={book.id}
+            name={book.title}
+            id={Number(book.id)}
+          />
+        ))}
 
       </ul>
     </div>
