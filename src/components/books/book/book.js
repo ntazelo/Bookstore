@@ -1,21 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { removeBook, API } from '../../../redux/books/books';
+import { removeBook } from '../../../redux/books/books';
 
 const Book = (props) => {
   const { name, id } = { ...props };
-  console.log(name, ' ', id);
   const dispatch = useDispatch();
 
   const removeBookHandler = async () => {
-    await fetch(`${API}/${id}`, {
-      method: 'DELETE',
-      body: JSON.stringify({
-        item_id: id,
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    });
     dispatch(removeBook(id));
   };
 
