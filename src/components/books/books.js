@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Book from './book/book';
-import { addBook, API } from '../../redux/books/books';
+import { addBook, fetchBook } from '../../redux/books/books';
 import './books.css';
 
 const Books = () => {
@@ -10,21 +10,13 @@ const Books = () => {
   const data = useSelector((state) => state.booksReducer);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const response = await fetch(`${API}`);
-    const Books = await response.json();
-    const booksID = Object.keys(Books);
-    const books = booksID.map((key) => {
-      const book = Books[key][0];
-      book.id = key;
-      return book;
-    });
-    books.forEach((book) => {
-      dispatch(addBook(book));
-    });
+  useEffect(() => {
+    if (data.length === 0) {
+      dispatch(fetchBook());
+    }
   }, []);
 
-  const submitBookToStore = async (e) => {
+  const submitBookToStore = (e) => {
     e.preventDefault();
     if (book.length > 0 && category.length > 0) {
       const newBook = {
@@ -32,18 +24,6 @@ const Books = () => {
         title: book,
         category,
       };
-
-      await fetch(`${API}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          item_id: newBook.id,
-          title: newBook.title,
-          category: newBook.category,
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
       dispatch(addBook(newBook));
 
       setBook('');
