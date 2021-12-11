@@ -11,21 +11,17 @@ const Books = () => {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    try {
-      const response = await fetch(`${API}`);
-      const Books = await response.json();
-      const booksID = Object.keys(Books);
-      const books = booksID.map((key) => {
-        const book = Books[key][0];
-        book.id = key;
-        return book;
-      });
-      books.forEach((book) => {
-        dispatch(addBook(book));
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    const response = await fetch(`${API}`);
+    const Books = await response.json();
+    const booksID = Object.keys(Books);
+    const books = booksID.map((key) => {
+      const book = Books[key][0];
+      book.id = key;
+      return book;
+    });
+    books.forEach((book) => {
+      dispatch(addBook(book));
+    });
   }, []);
 
   const submitBookToStore = async (e) => {
@@ -36,26 +32,23 @@ const Books = () => {
         title: book,
         category,
       };
-      try {
-        await fetch(`${API}`, {
-          method: 'POST',
-          body: JSON.stringify({
-            item_id: newBook.id,
-            title: newBook.title,
-            category: newBook.category,
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        });
-        dispatch(addBook(newBook));
-      } catch (err) {
-        console.log(err);
-      }
+
+      await fetch(`${API}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          item_id: newBook.id,
+          title: newBook.title,
+          category: newBook.category,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      dispatch(addBook(newBook));
+
       setBook('');
       setCategory('');
     }
-    console.log(data, 'store');
   };
 
   const addBookField = (e) => {
