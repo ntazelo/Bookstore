@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import { useDispatch } from 'react-redux';
 import { removeBook, API } from '../../../redux/books/books';
 
 const Book = (props) => {
-  const { name, id } = props;
+  const { name, id } = { ...props };
+  console.log(name, ' ', id);
   const dispatch = useDispatch();
 
   const removeBookHandler = async () => {
