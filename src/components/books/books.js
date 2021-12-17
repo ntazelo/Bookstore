@@ -48,6 +48,7 @@ const Books = () => {
             name={book.title}
             id={book.id}
             category={book.category}
+
           />
         ))}
         <hr className="horizontal-line" />
